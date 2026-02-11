@@ -17,8 +17,19 @@ const ProjectDetails = () => {
                 setProject(res.data);
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching project details:', error);
-                setLoading(false);
+                console.error('Error fetching project from API, trying fallback:', error);
+                try {
+                    const fallback = await axios.get('./projects.json');
+                    // In static mode, 'id' might be the title or index. Let's try matching.
+                    const projectData = fallback.data.find(p => p._id === id || p.title.replace(/\s+/g, '-').toLowerCase() === id);
+                    if (projectData) {
+                        setProject(projectData);
+                    }
+                } catch (fallbackErr) {
+                    console.error('Fallback failed:', fallbackErr);
+                } finally {
+                    setLoading(false);
+                }
             }
         };
         fetchProject();

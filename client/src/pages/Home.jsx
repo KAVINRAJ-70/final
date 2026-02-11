@@ -31,8 +31,13 @@ const Home = () => {
                 const res = await axios.get(`${API_URL}/projects`);
                 setFeaturedProjects(res.data.slice(0, 3));
             } catch (err) {
-                console.error('Error fetching projects:', err);
-                // Fallback or empty state handled by UI
+                console.error('Error fetching projects from API, trying fallback:', err);
+                try {
+                    const fallback = await axios.get('./projects.json');
+                    setFeaturedProjects(fallback.data.slice(0, 3));
+                } catch (fallbackErr) {
+                    console.error('Fallback also failed:', fallbackErr);
+                }
             }
         };
         fetchProjects();

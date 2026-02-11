@@ -14,7 +14,13 @@ const Projects = () => {
                 const res = await axios.get(`${API_URL}/projects`);
                 setProjects(res.data);
             } catch (err) {
-                console.error('Error fetching projects:', err);
+                console.error('Error fetching from API, trying fallback:', err);
+                try {
+                    const fallback = await axios.get('./projects.json');
+                    setProjects(fallback.data);
+                } catch (fallbackErr) {
+                    console.error('Fallback also failed:', fallbackErr);
+                }
             } finally {
                 setLoading(false);
             }

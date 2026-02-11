@@ -9,7 +9,7 @@ const ProjectCard = ({ project }) => {
             whileHover={{ y: -5 }}
         >
             <div className="relative h-48 overflow-hidden">
-                <Link to={`/projects/${project._id}`}>
+                <Link to={`/projects/${project._id || project.title.replace(/\s+/g, '-').toLowerCase()}`}>
                     <img
                         src={project.image || 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'}
                         alt={project.title}
@@ -26,14 +26,14 @@ const ProjectCard = ({ project }) => {
                     <MapPin size={14} className="mr-1 text-green-500" />
                     {project.location}
                 </div>
-                <Link to={`/projects/${project._id}`}>
+                <Link to={`/projects/${project._id || project.title.replace(/\s+/g, '-').toLowerCase()}`}>
                     <h3 className="text-xl font-bold text-white mb-2 hover:text-green-500 transition-colors">{project.title}</h3>
                 </Link>
                 <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">{project.description}</p>
 
                 <div className="mt-auto pt-4 border-t border-gray-700 flex items-center justify-between">
                     <span className="text-lg font-bold text-green-400">{project.price}</span>
-                    <Link to={`/projects/${project._id}`} className="flex items-center text-gray-300 font-medium hover:text-green-400 transition-colors group">
+                    <Link to={`/projects/${project._id || project.title.replace(/\s+/g, '-').toLowerCase()}`} className="flex items-center text-gray-300 font-medium hover:text-green-400 transition-colors group">
                         View Details <ArrowRight size={16} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
