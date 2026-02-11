@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100">
+  <!-- Background (Optional, remove if transparency needed) -->
+  <rect width="100%" height="100%" fill="transparent" />
+
+  <!-- Icon: Green House Outline with Roof -->
+  <path d="M20 50 L50 20 L80 50 v40 h-60 Z" fill="none" stroke="#10b981" stroke-width="5" stroke-linejoin="round" />
+  <path d="M35 50 v20 h30 v-20" fill="none" stroke="#10b981" stroke-width="4" />
+
+  <!-- Text: RS -->
+  <text x="90" y="70" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="60" fill="#ffffff" letter-spacing="-2">RS</text>
+  
+  <!-- Text: Promoters -->
+  <text x="180" y="45" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="24" fill="#10b981">PROMOTERS</text>
+  <text x="180" y="75" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#9ca3af" letter-spacing="1">REAL ESTATE</text>
+</svg>
