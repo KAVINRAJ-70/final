@@ -9,7 +9,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1600596542815-60c37c6525fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Coimbatore, Tamil Nadu",
         price: "₹1.2 Cr",
-        status: "Upcoming"
+        status: "Upcoming",
+        plotArea: 2400,
+        plotAreaUnit: "sq.ft.",
+        facing: "North",
+        gatedSociety: true
     },
     {
         title: "Urban Heights Apartments",
@@ -17,7 +21,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Chennai, Tamil Nadu",
         price: "₹75 Lakhs",
-        status: "Ongoing"
+        status: "Ongoing",
+        plotArea: 1200,
+        plotAreaUnit: "sq.ft.",
+        facing: "East",
+        gatedSociety: true
     },
     {
         title: "Lakeside Residency",
@@ -25,7 +33,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Bangalore, Karnataka",
         price: "₹90 Lakhs",
-        status: "Upcoming"
+        status: "Upcoming",
+        plotArea: 1500,
+        plotAreaUnit: "sq.ft.",
+        facing: "South",
+        gatedSociety: true
     },
     {
         title: "Sunshine City Plots",
@@ -33,7 +45,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Madurai, Tamil Nadu",
         price: "₹25 Lakhs",
-        status: "Completed"
+        status: "Completed",
+        plotArea: 1000,
+        plotAreaUnit: "sq.ft.",
+        facing: "West",
+        cornerProperty: true
     },
     {
         title: "Royal Palm Estates",
@@ -41,7 +57,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Trichy, Tamil Nadu",
         price: "₹45 Lakhs",
-        status: "Ongoing"
+        status: "Ongoing",
+        plotArea: 1800,
+        plotAreaUnit: "sq.ft.",
+        facing: "East",
+        gatedSociety: true
     },
     {
         title: "Eco-Smart Homes",
@@ -49,7 +69,11 @@ const sampleProjects = [
         image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         location: "Salem, Tamil Nadu",
         price: "₹55 Lakhs",
-        status: "Ongoing"
+        status: "Ongoing",
+        plotArea: 1100,
+        plotAreaUnit: "sq.ft.",
+        facing: "North",
+        gatedSociety: true
     }
 ];
 
