@@ -30,6 +30,11 @@ app.use('/api/contact', contactRoutes);
 // Health Check
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
+// Root Route
+app.get('/', (req, res) => {
+  res.send('RS Promoters API is running smoothly!');
+});
+
 // Database Connection
 const MONGODB_URI = process.env.MONGODB_URI;
 
