@@ -30,8 +30,8 @@ const Navbar = () => {
                     <div className="flex-shrink-0 flex items-center gap-2">
                         <Link to="/" className="flex items-center gap-3">
                             <img
-                                src="/logo.png"
-                                alt="RS Promoters"
+                                src={`${import.meta.env.BASE_URL}logo.png`}
+                                alt="RS Groups"
                                 className="h-12 w-auto object-contain"
                                 onError={(e) => {
                                     e.target.style.display = 'none';

@@ -20,7 +20,7 @@ const Hero = () => {
                     className="mb-8"
                 >
                     <img
-                        src="/logo.png"
+                        src={`${import.meta.env.BASE_URL}logo.png`}
                         alt="RS Groups Logo"
                         className="h-24 md:h-32 w-auto animate-pulse"
                     />

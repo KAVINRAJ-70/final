@@ -40,7 +40,7 @@ const About = () => {
                             transition={{ duration: 0.6 }}
                         >
                             <img
-                                src="/logo.png"
+                                src={`${import.meta.env.BASE_URL}logo.png`}
                                 alt="RS Groups Logo"
                                 className="w-full max-w-sm h-auto object-contain drop-shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105"
                             />
@@ -80,7 +80,7 @@ const About = () => {
                             {/* Leadership Focus in About Page */}
                             <div className="bg-[#242424] p-6 rounded-xl border border-gray-800 flex items-center gap-6 mb-8">
                                 <img
-                                    src="/kavin.jpg"
+                                    src={`${import.meta.env.BASE_URL}kavin.jpg`}
                                     alt="Kavin Raj S"
                                     className="w-24 h-24 rounded-full object-cover border-2 border-green-500"
                                 />
