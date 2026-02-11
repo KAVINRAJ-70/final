@@ -10,5 +10,7 @@
         "routes",
         "models"
     ],
-    "ext": "js,json"
+    "ext": "js,json",
+    "delay": "2500",
+    "signal": "SIGTERM"
 }
