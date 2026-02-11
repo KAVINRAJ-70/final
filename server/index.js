@@ -16,6 +16,7 @@ app.use(cors({
     'http://localhost:3000',
     process.env.FRONTEND_URL,
     'https://kavinraj-70.github.io',
+    'https://final-nv5x.onrender.com',
     'https://rs-promoters.vercel.app',
     'https://rs-promoters.netlify.app'
   ].filter(Boolean),
