@@ -15,7 +15,8 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:3000',
     process.env.FRONTEND_URL,
-    'https://rs-promoters.vercel.app', // Placeholder - user should update with their actual URL
+    'https://kavinraj-70.github.io',
+    'https://rs-promoters.vercel.app',
     'https://rs-promoters.netlify.app'
   ].filter(Boolean),
   credentials: true
