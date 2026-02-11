@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, ArrowLeft, CheckCircle, Ruler, Compass, Home, Shield, Maximize } from 'lucide-react';
+import API_URL from '../apiConfig';
 
 const ProjectDetails = () => {
     const { id } = useParams();
@@ -12,8 +13,7 @@ const ProjectDetails = () => {
     useEffect(() => {
         const fetchProject = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                const res = await axios.get(`${apiUrl}/api/projects/${id}`);
+                const res = await axios.get(`${API_URL}/projects/${id}`);
                 setProject(res.data);
                 setLoading(false);
             } catch (error) {

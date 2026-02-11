@@ -7,6 +7,7 @@ import ContactForm from '../components/ContactForm';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import API_URL from '../apiConfig';
 
 const Home = () => {
     const [featuredProjects, setFeaturedProjects] = useState([]);
@@ -27,8 +28,7 @@ const Home = () => {
         // Fetch projects for featured section (limit 3)
         const fetchProjects = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                const res = await axios.get(`${apiUrl}/api/projects`);
+                const res = await axios.get(`${API_URL}/projects`);
                 setFeaturedProjects(res.data.slice(0, 3));
             } catch (err) {
                 console.error('Error fetching projects:', err);

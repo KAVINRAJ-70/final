@@ -1,0 +1,14 @@
+{
+    "ignore": [
+        "node_modules",
+        "client",
+        "*.test.js",
+        "seed.js"
+    ],
+    "watch": [
+        "index.js",
+        "routes",
+        "models"
+    ],
+    "ext": "js,json"
+}

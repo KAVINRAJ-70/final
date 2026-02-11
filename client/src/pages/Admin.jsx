@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2 } from 'lucide-react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 
 const Admin = () => {
     const [activeTab, setActiveTab] = useState('contacts');
@@ -37,7 +38,7 @@ const Admin = () => {
 
     const fetchContacts = async () => {
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = API_URL;
             const response = await axios.get(`${apiUrl}/api/contact`);
             setContacts(response.data);
             setLoading(false);
@@ -49,7 +50,7 @@ const Admin = () => {
 
     const fetchProjects = async () => {
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = API_URL;
             const response = await axios.get(`${apiUrl}/api/projects`);
             setProjects(response.data);
         } catch (error) {
@@ -65,7 +66,7 @@ const Admin = () => {
     const handleDeleteContact = async (id) => {
         if (!window.confirm('Are you sure you want to delete this message?')) return;
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = API_URL;
             await axios.delete(`${apiUrl}/api/contact/${id}`);
             setContacts(contacts.filter(contact => contact._id !== id));
         } catch (error) {
@@ -77,7 +78,7 @@ const Admin = () => {
     const handleDeleteProject = async (id) => {
         if (!window.confirm('Are you sure you want to delete this project?')) return;
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = API_URL;
             await axios.delete(`${apiUrl}/api/projects/${id}`);
             setProjects(projects.filter(project => project._id !== id));
         } catch (error) {

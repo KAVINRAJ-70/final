@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProjectCard from '../components/ProjectCard';
 import { motion } from 'framer-motion';
+import API_URL from '../apiConfig';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -10,8 +11,7 @@ const Projects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                const res = await axios.get(`${apiUrl}/api/projects`);
+                const res = await axios.get(`${API_URL}/projects`);
                 setProjects(res.data);
             } catch (err) {
                 console.error('Error fetching projects:', err);

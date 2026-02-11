@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 const ContactForm = () => {
@@ -20,8 +21,7 @@ const ContactForm = () => {
         setStatus('loading');
 
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-            await axios.post(`${apiUrl}/api/contact`, formData);
+            await axios.post(`${API_URL}/contact`, formData);
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', message: '' });
         } catch (error) {
