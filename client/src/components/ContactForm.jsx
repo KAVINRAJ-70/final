@@ -37,7 +37,7 @@ const ContactForm = () => {
             {status === 'success' && (
                 <div className="bg-green-900/30 text-green-400 p-4 rounded-lg mb-6 flex items-center border border-green-900/50">
                     <CheckCircle size={20} className="mr-2" />
-                    Message sent successfully! We'll allow get back to you soon.
+                    Message sent successfully! We'll get back to you soon.
                 </div>
             )}
 
@@ -112,7 +112,7 @@ const ContactForm = () => {
                         }`}
                 >
                     {status === 'loading' ? 'Sending...' : 'Send Message'}
-                    {!status === 'loading' && <Send size={18} />}
+                    {status !== 'loading' && <Send size={18} />}
                 </button>
             </form>
         </div>

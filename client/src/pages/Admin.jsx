@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2 } from 'lucide-react';
+import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2, X } from 'lucide-react';
 import axios from 'axios';
 import API_URL from '../apiConfig';
 
@@ -39,7 +39,7 @@ const Admin = () => {
     const fetchContacts = async () => {
         try {
             const apiUrl = API_URL;
-            const response = await axios.get(`${apiUrl}/api/contact`);
+            const response = await axios.get(`${apiUrl}/contact`);
             setContacts(response.data);
             setLoading(false);
         } catch (error) {
@@ -51,7 +51,7 @@ const Admin = () => {
     const fetchProjects = async () => {
         try {
             const apiUrl = API_URL;
-            const response = await axios.get(`${apiUrl}/api/projects`);
+            const response = await axios.get(`${apiUrl}/projects`);
             setProjects(response.data);
         } catch (error) {
             console.error('Error fetching projects:', error);
@@ -67,7 +67,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this message?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/api/contact/${id}`);
+            await axios.delete(`${apiUrl}/contact/${id}`);
             setContacts(contacts.filter(contact => contact._id !== id));
         } catch (error) {
             console.error('Error deleting contact:', error);
@@ -79,7 +79,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this project?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/api/projects/${id}`);
+            await axios.delete(`${apiUrl}/projects/${id}`);
             setProjects(projects.filter(project => project._id !== id));
         } catch (error) {
             console.error('Error deleting project:', error);
@@ -95,14 +95,14 @@ const Admin = () => {
         e.preventDefault();
         setStatus('loading');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = API_URL;
             if (editingId) {
-                const response = await axios.put(`${apiUrl}/api/projects/${editingId}`, projectForm);
+                const response = await axios.put(`${apiUrl}/projects/${editingId}`, projectForm);
                 setProjects(projects.map(p => p._id === editingId ? response.data : p));
                 setStatus('success');
                 setEditingId(null);
             } else {
-                const response = await axios.post(`${apiUrl}/api/projects`, projectForm);
+                const response = await axios.post(`${apiUrl}/projects`, projectForm);
                 setProjects([...projects, response.data]);
                 setStatus('success');
             }
