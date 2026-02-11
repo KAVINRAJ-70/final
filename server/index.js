@@ -50,6 +50,13 @@ process.on('unhandledRejection', (reason, promise) => {
   // Application specific logging, throwing an error, or other logic here
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+server.on('error', (e) => {
+  if (e.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use. Please close the process using it or try again.`);
+    process.exit(1);
+  }
 });
