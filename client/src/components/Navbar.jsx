@@ -37,7 +37,7 @@ const Navbar = () => {
                                     e.target.style.display = 'none';
                                 }}
                             />
-                            <span className="text-xl md:text-2xl font-bold text-green-500 tracking-tight">RS Promoters</span>
+                            <span className="text-xl md:text-2xl font-bold text-green-500 tracking-tight">RS Groups</span>
                         </Link>
                     </div>
                     <div className="hidden md:block">

@@ -15,7 +15,7 @@ const About = () => {
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-6xl font-bold text-white mb-6"
                     >
-                        About <span className="text-green-500">RS Promoters</span>
+                        About <span className="text-green-500">RS Groups</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ const About = () => {
                         >
                             <img
                                 src="/logo.png"
-                                alt="RS Promoters Logo"
+                                alt="RS Groups Logo"
                                 className="w-full max-w-sm h-auto object-contain drop-shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105"
                             />
                         </motion.div>
@@ -55,7 +55,7 @@ const About = () => {
                             <h4 className="text-green-500 font-bold uppercase tracking-wider mb-3">Who We Are</h4>
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Building Trust Across Tamil Nadu</h2>
                             <p className="text-gray-400 mb-6 leading-relaxed text-lg">
-                                Established in 2010 by visionary founder <strong>Satheesh Kumar R</strong>, RS Promoters has grown into a trusted name in real estate.
+                                Established in 2010 by visionary founder <strong>Satheesh Kumar R</strong>, RS Groups has grown into a trusted name in real estate.
                                 Today, under the dynamic leadership of <strong>Kavin Raj S</strong>, we continue to expand our footprint, offering premium land and housing solutions.
                             </p>
                             <p className="text-gray-400 mb-8 leading-relaxed text-lg">

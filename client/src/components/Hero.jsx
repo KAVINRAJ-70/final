@@ -12,14 +12,27 @@ const Hero = () => {
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/80 via-black/50 to-[#1a1a1a]"></div>
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8 }}
+                    className="mb-8"
+                >
+                    <img
+                        src="/logo.png"
+                        alt="RS Groups Logo"
+                        className="h-24 md:h-32 w-auto animate-pulse"
+                    />
+                </motion.div>
+
                 <motion.h1
                     className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    Find Your Dream Property with <span className="text-green-500">RS Promoters</span>
+                    Find Your Dream Property with <span className="text-green-500">RS Groups</span>
                 </motion.h1>
 
                 <motion.p
