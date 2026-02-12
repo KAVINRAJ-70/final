@@ -18,7 +18,9 @@ app.use(cors({
     'https://kavinraj-70.github.io',
     'https://final-nv5x.onrender.com',
     'https://rs-promoters.vercel.app',
-    'https://rs-promoters.netlify.app'
+    'https://rs-promoters.netlify.app',
+    'https://rspromoters.netlify.app',
+    'https://www.rspromoters.netlify.app'
   ].filter(Boolean),
   credentials: true
 }));
