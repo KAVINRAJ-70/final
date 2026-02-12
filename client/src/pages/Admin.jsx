@@ -161,7 +161,19 @@ const Admin = () => {
     return (
         <div className="bg-[#1a1a1a] min-h-screen pt-24 pb-12 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-3xl font-bold mb-8 text-green-500">Admin Dashboard</h1>
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-3xl font-bold text-green-500">Admin Dashboard</h1>
+                    <button
+                        onClick={() => {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('user');
+                            window.location.href = '/final/#/login';
+                        }}
+                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold transition-colors"
+                    >
+                        Logout
+                    </button>
+                </div>
 
                 {/* Tabs */}
                 <div className="flex space-x-4 mb-8 border-b border-gray-800 pb-4">
