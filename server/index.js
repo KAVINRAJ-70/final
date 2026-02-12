@@ -39,6 +39,20 @@ app.get('/', (req, res) => {
 });
 
 // Database Connection
+
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// Import User model for seeding
+const User = require('./models/User');
+const authRoutes = require('./routes/authRoutes');
+
+// Mount Auth Routes
+app.use('/api/auth', authRoutes);
+
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
@@ -47,17 +61,27 @@ if (!MONGODB_URI) {
 }
 
 mongoose.connect(MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
+  .then(async () => {
+    console.log('MongoDB connected');
+
+    // Auto-seed Admin User
+    try {
+      const adminCount = await User.countDocuments();
+      if (adminCount === 0) {
+        const username = process.env.ADMIN_USERNAME || 'admin';
+        const password = process.env.ADMIN_PASSWORD || 'admin123';
+
+        const admin = new User({ username, password });
+        await admin.save();
+        console.log(`Default Admin created: ${username} / ${password} (Change this!)`);
+      }
+    } catch (err) {
+      console.error('Error seeding admin:', err);
+    }
+  })
   .catch(err => {
     console.error('MongoDB connection error:', err);
-    // Explicitly do not exit yet, let the server run so we can see the error
   });
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  // Application specific logging, throwing an error, or other logic here
-});
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
