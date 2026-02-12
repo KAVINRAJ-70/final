@@ -6,6 +6,25 @@
   <link rel="icon" type="image/svg+xml" href="./logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RS Groups</title>
+  <script>
+    window.onerror = function (message, source, lineno, colno, error) {
+      document.body.innerHTML = '<div style="color:red; padding:20px; font-family:monospace; white-space:pre-wrap;">' +
+        '<h1>Runtime Error</h1>' +
+        '<p><b>Error:</b> ' + message + '</p>' +
+        '<p><b>Source:</b> ' + source + ':' + lineno + ':' + colno + '</p>' +
+        '<p><b>Stack:</b>Wrapper ' + (error ? error.stack : 'No stack trace') + '</p>' +
+        '</div>';
+      console.error(message, error);
+      return false; // let default handler run too
+    };
+    window.addEventListener('unhandledrejection', function (event) {
+      document.body.innerHTML = '<div style="color:red; padding:20px; font-family:monospace; white-space:pre-wrap;">' +
+        '<h1>Unhandled Promise Rejection</h1>' +
+        '<p><b>Reason:</b> ' + event.reason + '</p>' +
+        '</div>';
+      console.error('Unhandled rejection:', event.reason);
+    });
+  </script>
 </head>
 
 <body>
