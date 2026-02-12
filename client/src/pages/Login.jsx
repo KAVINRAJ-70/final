@@ -28,7 +28,19 @@ const Login = () => {
             // Redirect to admin
             navigate('/admin');
         } catch (err) {
-            setError(err.response?.data?.error || 'Login failed');
+            console.error('Login error:', err);
+            let errorMessage = 'Login failed';
+            if (err.response) {
+                // Server responded with a status code other than 2xx
+                errorMessage = `Error ${err.response.status}: ${err.response.data?.error || err.response.statusText}`;
+            } else if (err.request) {
+                // Request was made but no response received
+                errorMessage = 'Network Error: No response from server. Check console for CORS or connection issues.';
+            } else {
+                // Something else happened
+                errorMessage = err.message;
+            }
+            setError(errorMessage);
         }
     };
 
