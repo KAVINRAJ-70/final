@@ -66,14 +66,19 @@ mongoose.connect(MONGODB_URI)
 
     // Auto-seed Admin User
     try {
-      const adminCount = await User.countDocuments();
-      if (adminCount === 0) {
-        const username = process.env.ADMIN_USERNAME || 'admin';
-        const password = process.env.ADMIN_PASSWORD || 'admin123';
+      const targetUsername = 'admin';
+      const targetPassword = '23070'; // Requested by user
 
-        const admin = new User({ username, password });
-        await admin.save();
-        console.log(`Default Admin created: ${username} / ${password} (Change this!)`);
+      const existingAdmin = await User.findOne({ username: targetUsername });
+
+      if (existingAdmin) {
+        existingAdmin.password = targetPassword;
+        await existingAdmin.save();
+        console.log(`Admin '${targetUsername}' password updated to '${targetPassword}'`);
+      } else {
+        const newAdmin = new User({ username: targetUsername, password: targetPassword });
+        await newAdmin.save();
+        console.log(`Admin '${targetUsername}' created with password '${targetPassword}'`);
       }
     } catch (err) {
       console.error('Error seeding admin:', err);
