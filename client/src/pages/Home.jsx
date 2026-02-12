@@ -122,7 +122,7 @@ const Home = () => {
                                 {/* Handler */}
                                 <div className="bg-white/5 p-4 rounded-xl backdrop-blur-sm border border-white/10 flex flex-col items-center text-center">
                                     <img
-                                        src="/kavin.jpg"
+                                        src={`${import.meta.env.BASE_URL}kavin.jpg`}
                                         alt="Kavin Raj S"
                                         className="w-16 h-16 rounded-full object-cover border-2 border-green-500 mb-3"
                                     />

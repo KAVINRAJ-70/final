@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Project = require('../models/Project');
+const auth = require('../middleware/auth');
 
 // GET all projects
 router.get('/', async (req, res) => {
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST a new project
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const project = new Project({
         title: req.body.title,
         description: req.body.description,
@@ -57,7 +58,7 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE a project
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     try {
         const updatedProject = await Project.findByIdAndUpdate(
             req.params.id,
@@ -72,7 +73,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE a project
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     try {
         await Project.findByIdAndDelete(req.params.id);
         res.json({ message: 'Project deleted' });

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Contact = require('../models/Contact');
+const auth = require('../middleware/auth');
 
 // POST a contact form submission
 router.post('/', async (req, res) => {
@@ -19,8 +20,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-// GET all contacts (Admin only - ideally protected)
-router.get('/', async (req, res) => {
+// GET all contacts (Admin only)
+router.get('/', auth, async (req, res) => {
     try {
         const contacts = await Contact.find().sort({ createdAt: -1 });
         res.json(contacts);
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 // DELETE a contact submission
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     try {
         await Contact.findByIdAndDelete(req.params.id);
         res.json({ message: 'Contact deleted' });
