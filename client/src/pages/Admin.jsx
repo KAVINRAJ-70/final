@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2, X, LogOut } from 'lucide-react';
+import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2, X } from 'lucide-react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import API_URL from '../apiConfig';
 
 const Admin = () => {
@@ -10,18 +9,6 @@ const Admin = () => {
     const [contacts, setContacts] = useState([]);
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-
-    // Axios config with token
-    const getAuthHeaders = () => ({
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    });
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        navigate('/login');
-    };
     const [projectForm, setProjectForm] = useState({
         title: '',
         description: '',
@@ -52,7 +39,7 @@ const Admin = () => {
     const fetchContacts = async () => {
         try {
             const apiUrl = API_URL;
-            const response = await axios.get(`${apiUrl}/contact`, getAuthHeaders());
+            const response = await axios.get(`${apiUrl}/contact`);
             setContacts(response.data);
             setLoading(false);
         } catch (error) {
@@ -80,7 +67,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this message?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/contact/${id}`, getAuthHeaders());
+            await axios.delete(`${apiUrl}/contact/${id}`);
             setContacts(contacts.filter(contact => contact._id !== id));
         } catch (error) {
             console.error('Error deleting contact:', error);
@@ -92,7 +79,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this project?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/projects/${id}`, getAuthHeaders());
+            await axios.delete(`${apiUrl}/projects/${id}`);
             setProjects(projects.filter(project => project._id !== id));
         } catch (error) {
             console.error('Error deleting project:', error);
@@ -110,12 +97,12 @@ const Admin = () => {
         try {
             const apiUrl = API_URL;
             if (editingId) {
-                const response = await axios.put(`${apiUrl}/projects/${editingId}`, projectForm, getAuthHeaders());
+                const response = await axios.put(`${apiUrl}/projects/${editingId}`, projectForm);
                 setProjects(projects.map(p => p._id === editingId ? response.data : p));
                 setStatus('success');
                 setEditingId(null);
             } else {
-                const response = await axios.post(`${apiUrl}/projects`, projectForm, getAuthHeaders());
+                const response = await axios.post(`${apiUrl}/projects`, projectForm);
                 setProjects([...projects, response.data]);
                 setStatus('success');
             }
@@ -174,15 +161,7 @@ const Admin = () => {
     return (
         <div className="bg-[#1a1a1a] min-h-screen pt-24 pb-12 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-green-500">Admin Dashboard</h1>
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white px-4 py-2 rounded-lg transition-all border border-red-600/20"
-                    >
-                        <LogOut size={18} /> Logout
-                    </button>
-                </div>
+                <h1 className="text-3xl font-bold mb-8 text-green-500">Admin Dashboard</h1>
 
                 {/* Tabs */}
                 <div className="flex space-x-4 mb-8 border-b border-gray-800 pb-4">

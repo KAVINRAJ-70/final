@@ -4,8 +4,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Admin from './pages/Admin';
-import Login from './pages/Login';
-import ProtectedRoute from './components/ProtectedRoute';
 
 import { useEffect } from 'react';
 
@@ -28,12 +26,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            } />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />
