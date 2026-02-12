@@ -6,6 +6,7 @@ require('dotenv').config();
 const projectRoutes = require('./routes/projectRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const authRoutes = require('./routes/authRoutes');
+const auth = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,9 +29,9 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/auth', authRoutes);
 
 // Health Check
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));

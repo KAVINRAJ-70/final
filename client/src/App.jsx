@@ -1,8 +1,11 @@
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import { useEffect } from 'react';
 
@@ -26,12 +29,11 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />
             <Route path="/login" element={<Login />} />
-            <Route
-              path="/admin"
-              element={
-                localStorage.getItem('adminToken') ? <Admin /> : <Navigate to="/login" />
-              }
-            />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />

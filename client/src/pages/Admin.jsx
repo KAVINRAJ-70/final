@@ -2,15 +2,26 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Plus, LayoutGrid, CheckCircle, AlertCircle, Trash2, X, LogOut } from 'lucide-react';
 import axios from 'axios';
-import API_URL from '../apiConfig';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../apiConfig';
 
 const Admin = () => {
-    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('contacts');
     const [contacts, setContacts] = useState([]);
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
+    // Axios config with token
+    const getAuthHeaders = () => ({
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
+    };
     const [projectForm, setProjectForm] = useState({
         title: '',
         description: '',
@@ -39,31 +50,18 @@ const Admin = () => {
     }, []);
 
     const fetchContacts = async () => {
-        const token = localStorage.getItem('adminToken');
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-
         try {
             const apiUrl = API_URL;
-            const response = await axios.get(`${apiUrl}/contact`, {
-                headers: { 'x-auth-token': token }
-            });
+            const response = await axios.get(`${apiUrl}/contact`, getAuthHeaders());
             setContacts(response.data);
             setLoading(false);
         } catch (error) {
-            if (error.response?.status === 401) {
-                localStorage.removeItem('adminToken');
-                navigate('/login');
-            }
             console.error('Error fetching contacts:', error);
             setLoading(false);
         }
     };
 
     const fetchProjects = async () => {
-        const token = localStorage.getItem('adminToken');
         try {
             const apiUrl = API_URL;
             const response = await axios.get(`${apiUrl}/projects`);
@@ -71,12 +69,6 @@ const Admin = () => {
         } catch (error) {
             console.error('Error fetching projects:', error);
         }
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminUser');
-        navigate('/login');
     };
 
     useEffect(() => {
@@ -88,9 +80,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this message?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/contact/${id}`, {
-                headers: { 'x-auth-token': localStorage.getItem('adminToken') }
-            });
+            await axios.delete(`${apiUrl}/contact/${id}`, getAuthHeaders());
             setContacts(contacts.filter(contact => contact._id !== id));
         } catch (error) {
             console.error('Error deleting contact:', error);
@@ -102,9 +92,7 @@ const Admin = () => {
         if (!window.confirm('Are you sure you want to delete this project?')) return;
         try {
             const apiUrl = API_URL;
-            await axios.delete(`${apiUrl}/projects/${id}`, {
-                headers: { 'x-auth-token': localStorage.getItem('adminToken') }
-            });
+            await axios.delete(`${apiUrl}/projects/${id}`, getAuthHeaders());
             setProjects(projects.filter(project => project._id !== id));
         } catch (error) {
             console.error('Error deleting project:', error);
@@ -121,16 +109,13 @@ const Admin = () => {
         setStatus('loading');
         try {
             const apiUrl = API_URL;
-            const token = localStorage.getItem('adminToken');
-            const config = { headers: { 'x-auth-token': token } };
-
             if (editingId) {
-                const response = await axios.put(`${apiUrl}/projects/${editingId}`, projectForm, config);
+                const response = await axios.put(`${apiUrl}/projects/${editingId}`, projectForm, getAuthHeaders());
                 setProjects(projects.map(p => p._id === editingId ? response.data : p));
                 setStatus('success');
                 setEditingId(null);
             } else {
-                const response = await axios.post(`${apiUrl}/projects`, projectForm, config);
+                const response = await axios.post(`${apiUrl}/projects`, projectForm, getAuthHeaders());
                 setProjects([...projects, response.data]);
                 setStatus('success');
             }
@@ -191,15 +176,12 @@ const Admin = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-green-500">Admin Dashboard</h1>
-                    <div className="flex items-center gap-4">
-                        <span className="text-gray-400 text-sm">Welcome, {localStorage.getItem('adminUser')}</span>
-                        <button
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 bg-red-900/30 text-red-400 px-4 py-2 rounded-lg hover:bg-red-900/50 transition-all border border-red-900/50"
-                        >
-                            <LogOut size={18} /> Logout
-                        </button>
-                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white px-4 py-2 rounded-lg transition-all border border-red-600/20"
+                    >
+                        <LogOut size={18} /> Logout
+                    </button>
                 </div>
 
                 {/* Tabs */}
