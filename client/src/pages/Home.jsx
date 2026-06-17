@@ -73,11 +73,29 @@ const Home = () => {
             </section>
 
             {/* Featured Projects Section */}
-            <section className="py-24 bg-[#111111] relative">
+            <section className="py-28 bg-gradient-to-b from-[#0d0d0d] to-[#080808] relative overflow-hidden bg-dot-pattern border-y border-white/5">
+                {/* Subtle Ambient Glowing Orbs */}
+                <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-500/5 glow-blur rounded-full pointer-events-none -z-10" />
+                <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-emerald-500/5 glow-blur rounded-full pointer-events-none -z-10" />
+
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured Projects</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">Discover our handpicked selection of premium properties.</p>
+                        <motion.span 
+                            className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/30 border border-emerald-900/30 px-3 py-1.5 rounded-full"
+                            initial={{ opacity: 0, y: -10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            Exclusive Showcases
+                        </motion.span>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4 tracking-tight">
+                            Our Featured <span className="text-gradient-emerald">Projects</span>
+                        </h2>
+                        <div className="w-12 h-1 bg-emerald-500 mx-auto rounded-full mb-6" />
+                        <p className="text-gray-400 max-w-2xl mx-auto text-base font-light">
+                            Discover our handpicked selection of premium properties, custom tailored for high appreciation and modern comfort.
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -86,9 +104,13 @@ const Home = () => {
                         ))}
                     </div>
 
-                    <div className="text-center mt-14">
-                        <Link to="/projects" className="inline-block px-10 py-4 bg-transparent border border-gray-600 text-white font-semibold rounded-full hover:bg-green-600 hover:border-green-600 transition-all duration-300">
+                    <div className="text-center mt-16">
+                        <Link 
+                            to="/projects" 
+                            className="inline-flex items-center gap-2 px-10 py-4 bg-transparent hover:bg-emerald-500 border border-white/10 hover:border-emerald-500 text-white hover:text-white font-semibold rounded-full shadow-md hover:shadow-emerald-500/20 transition-all duration-300 transform hover:scale-[1.02]"
+                        >
                             View All Projects
+                            <ArrowRight size={16} />
                         </Link>
                     </div>
                 </div>
